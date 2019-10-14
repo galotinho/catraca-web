@@ -4,7 +4,7 @@ CREATE TABLE autorizacao (
   PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE AUTORIZACAO_TEM_ALUNOS (
+CREATE TABLE autorizacao_tem_alunos (
   autorizacao_id bigint(20) NOT NULL,
   aluno_id bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
