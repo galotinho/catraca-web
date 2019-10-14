@@ -10,6 +10,8 @@ CREATE TABLE TURMA (
   PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+COMMIT;
+
 INSERT INTO curso VALUES (1, 'Integrado em Informática');
 INSERT INTO curso VALUES (2, 'Integrado em Guia de Turismo');
 INSERT INTO curso VALUES (3, 'Subsequente em Agropecuária');
@@ -34,3 +36,4 @@ INSERT INTO turma VALUES (11, '1 Ano');
 INSERT INTO turma VALUES (12, '2 Ano');
 INSERT INTO turma VALUES (13, '3 Ano');
 
+COMMIT;
