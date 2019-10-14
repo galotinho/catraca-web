@@ -21,7 +21,7 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity	
-@Table(name = "AUTORIZACAO")
+@Table(name = "autorizacao")
 public class Autorizacao {
 
 	@EqualsAndHashCode.Include
@@ -35,7 +35,7 @@ public class Autorizacao {
 	
 	@ManyToMany
 	@JoinTable(
-		name = "AUTORIZACAO_TEM_ALUNOS", 
+		name = "autorizacao_tem_alunos", 
         joinColumns = { @JoinColumn(name = "autorizacao_id", referencedColumnName = "id") }, 
         inverseJoinColumns = { @JoinColumn(name = "aluno_id", referencedColumnName = "id") }
 	)
