@@ -22,14 +22,12 @@ $(document).ready(function () {
             },
             {data : 'alunos',
                 render : function(alunos) {
-    				var aux = new Array();
+                	var nome = "";
     				$.each(alunos, function( index, value ){
-    					  var nome = " ";
     					  nome = nome.concat(value.nome);
-    					 					  
-    					  aux.push(nome);
+    					  nome = nome.concat("<br>");
     				});
-    				return aux;
+    				return nome;
     			}, orderable : false,
             },
             {data : 'alunos',
@@ -43,14 +41,12 @@ $(document).ready(function () {
             },
             {data : 'alunos',
                 render : function(alunos) {
-    				var aux = new Array();
+                	var turma = "";
     				$.each(alunos, function( index, value ){
-    					  var turma = " ";
     					  turma = turma.concat(value.turma.nome);
-    					 					  
-    					  aux.push(turma);
+    					  turma = turma.concat("<br>");
     				});
-    				return aux;
+    				return turma;
     			}, orderable : false,
             },
             {orderable: false,
