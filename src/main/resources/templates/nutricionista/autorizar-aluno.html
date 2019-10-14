@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml"
+	  layout:decorate="~{layout}">
+<head>
+<meta charset="UTF-8" />
+</head>
+
+<body>
+	<section class="layout-content" layout:fragment="corpo">	
+		<main role="main">
+		
+		<section class="jumbotron text-center mt-5">						
+			<div class="container">
+				<h1 class="jumbotron-heading">Coordenação de Assistência ao Aluno</h1>
+				<p class="lead text-muted">Sistema de Controle do Refeitório</p>
+			</div>
+		</section>
+			
+		<div class="album py-5 bg-light">
+			<div class="container">
+				<div class="d-flex justify-content-center">					
+					<div class="col-md-8">						
+						<div th:replace="fragments/alert"></div>
+						<form th:action="@{/aluno/salvar}"
+							method="POST" class="was-validated">							
+							<div class="form-row">								
+							<div class="form-group col-md-12">
+								<small class="form-text text-muted">Selecione 
+									a data</small>
+								<input class="form-control" type="date" id="data" 
+									 required/>
+								<div class="invalid-feedback">
+							      Data é obrigatória.
+							    </div>	
+							</div>
+							</div>	
+							<div class="input-group mb-3">
+							  <div class="input-group-prepend">
+							    <label for="nome">Curso</label> 
+							  </div>
+							  <div id="curso" class="input-group">
+								  <select class="custom-select" id="cursos">
+								    
+								  </select>
+								  <div class="invalid-feedback">Curso é requerido.</div>
+							  </div>
+							</div>
+							<div class="input-group mb-3">
+							  <div class="input-group-prepend">
+							    <label for="nome">Turma</label> 
+							  </div>
+							  <div id="turma" class="input-group">
+								  <select class="custom-select" id="turmas">
+								    
+								  </select>
+								  <div class="invalid-feedback">Turma é requerida.</div>
+							  </div>
+							</div>
+							
+							<input type="hidden"/>	
+											
+							<div class="form-group row">
+								<div class="col-sm-10">
+									<button type="submit" class="btn btn-primary" data-toggle="tooltip"
+											data-placement="right" title="Autorizar"><i class="fas fa-save"></i></button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		</main>
+	</section>
+	<script th:src="@{/js/aluno.js?(v=${version})}" th:fragment="js"></script>
+	<script th:inline="javascript" th:fragment="inlinescript">
+	
+	$(document).ready(function() {
+		$.get('/aluno/curso/listar' , function( result ) {
+	    	$.each(result, function (k, v) {	    		
+    			$("#cursos").append( 
+        				'<option name= "op" class="op" value="'+ v.id +'">'+ v.nome + '</option>'
+        		);	    			            			
+	    	  });
+	    	});
+	    });
+	
+	$(document).ready(function() {
+		$.get('/aluno/turma/listar' , function( result ) {
+	    	$.each(result, function (k, v) {	    		
+    			$("#turmas").append( 
+        				'<option name= "op" class="op" value="'+ v.id +'">'+ v.nome + '</option>'
+        		);	    			            			
+	    	  });
+	    	});
+	    });
+	
+	</script>
+</body>
+</html>

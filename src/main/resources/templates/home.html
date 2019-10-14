@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml"
+	layout:decorate="~{layout}">
+<head>
+<meta charset="UTF-8" />
+</head>
+<body>
+
+	<section class="layout-content" layout:fragment="corpo">
+		<main role="main">
+		<section class="jumbotron text-center mt-5">						
+			<div class="container">
+				<h1 class="jumbotron-heading">Coordenação de Assistência ao Aluno</h1>
+				<p class="lead text-muted">Sistema de Controle do Refeitório</p>
+				
+			</div>
+		</section>
+		<div class="album bg-light">
+			<div class="container d-flex justify-content-center align-items-center">
+				<div class="form-row">								
+					<div class="form-group col-md-12">
+						<h2>Refeições</h2>
+						<table id="table-cardapio" 
+							class="table table-sm table-striped table-bordered pre-wrap"
+							style="width: 100%">
+							<thead class="thead-dark">
+								<tr>
+									<th scope="col">Data</th>
+									<th scope="col">Cardápio</th>
+								</tr>
+							</thead>
+						</table>
+					</div>
+				</div>	
+			</div>
+		</div>
+		</main>
+	</section>
+	<script th:src="@{/js/home.js?(v=${version})}" th:fragment="js"></script>
+	<script th:inline="javascript" th:fragment="inlinescript"></script>
+</body>
+</html>

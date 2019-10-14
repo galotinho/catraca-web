@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml"
+	  layout:decorate="~{layout}">
+<head>
+<meta charset="UTF-8" />
+</head>
+
+<body>
+	<section class="layout-content" layout:fragment="corpo">	
+		<main role="main">
+		
+		<section class="jumbotron text-center mt-5">						
+			<div class="container">
+				<h1 class="jumbotron-heading">Coordenação de Assistência ao Aluno</h1>
+				<p class="lead text-muted">Sistema de Controle do Refeitório</p>
+			</div>
+		</section>
+			
+		<div class="album py-5 bg-light">
+			<div class="container">
+				<div class="d-flex justify-content-center">					
+					<div class="col-md-8">						
+						<div th:replace="fragments/alert"></div>
+						<form th:action="@{/aluno/salvar}" th:object="${aluno}"
+							method="POST" class="was-validated">							
+							<div class="form-group row">
+								<label for="aluno" 
+									class="col-sm-2 col-form-label">Nome</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" th:field="*{nome}"
+										id="nome" required />
+									<div class="invalid-feedback">Nome é requerido.</div>	
+								</div>
+							</div>		
+							<div class="form-group row">
+								<label for="aluno" 
+									class="col-sm-2 col-form-label">Matrícula</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" th:field="*{matricula}"
+										id="matricula" required />
+									<div class="invalid-feedback">Matrícula é requerida.</div>	
+								</div>
+							</div>	
+							<div class="form-group row">
+								<label for="aluno" 
+									class="col-sm-2 col-form-label">Código do Cartão</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" th:field="*{codigoCartao}"
+										id="codigoCartao" required />
+									<div class="invalid-feedback">Código do cartão é requerido.</div>	
+								</div>
+							</div>
+							<div class="input-group mb-3">
+							  <div class="input-group-prepend">
+							    <label for="nome">Curso</label> 
+							  </div>
+							  <div id="curso" class="input-group">
+								  <select class="custom-select" id="cursos" th:field="*{curso}">
+								    
+								  </select>
+								  <div class="invalid-feedback">Curso é requerido.</div>
+							  </div>
+							</div>
+							<div class="input-group mb-3">
+							  <div class="input-group-prepend">
+							    <label for="nome">Turma</label> 
+							  </div>
+							  <div id="turma" class="input-group">
+								  <select class="custom-select" id="turmas" th:field="*{turma}">
+								    
+								  </select>
+								  <div class="invalid-feedback">Turma é requerida.</div>
+							  </div>
+							</div>
+							
+							<input type="hidden" th:field="*{id}"/>	
+											
+							<div class="form-group row">
+								<div class="col-sm-10">
+									<button type="submit" class="btn btn-primary" data-toggle="tooltip"
+											data-placement="right" title="Salvar"><i class="fas fa-save"></i></button>
+								</div>
+							</div>
+						</form>
+						
+						<hr/>
+						
+						<h2>Lista de Alunos</h2>
+						
+						<table id="table-aluno" class="table table-sm table-striped table-bordered nowrap" style="width:100%">
+						  <thead class="thead-dark">
+						    <tr>
+						      <th scope="col">#</th>
+						      <th scope="col">Nome</th>
+						      <th scope="col">Curso</th>
+						      <th scope="col">Turma</th>
+						      <th scope="col">Editar</th>
+						      <th scope="col">Excluir</th>
+						    </tr>
+						  </thead>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		</main>
+	</section>
+	<script th:src="@{/js/aluno.js?(v=${version})}" th:fragment="js"></script>
+	<script th:inline="javascript" th:fragment="inlinescript">
+	/*[# th:if="${aluno.curso != null}"]*/
+	$(document).ready(function() {
+		$.get('/aluno/curso/listar' , function( result ) {
+	    	$.each(result, function (k, v) {
+	    		if(v.id == [[${aluno.curso.id}]]){
+	    			$("#cursos").append( 
+	        				'<option name= "op" class="op" value="'+ v.id +'" selected="selected">'+ v.nome + '</option>'
+	        		);
+	    		}else{
+	    			$("#cursos").append( 
+	        				'<option name= "op" class="op" value="'+ v.id +'">'+ v.nome + '</option>'
+	        		);
+	    		}
+    				            			
+	    	  });
+	    	});
+	    });
+	/*[/]*/	
+	
+	/*[# th:if="${aluno.curso == null}"]*/
+	$(document).ready(function() {
+		$.get('/aluno/curso/listar' , function( result ) {
+	    	$.each(result, function (k, v) {	    		
+    			$("#cursos").append( 
+        				'<option name= "op" class="op" value="'+ v.id +'">'+ v.nome + '</option>'
+        		);	    			            			
+	    	  });
+	    	});
+	    });
+	/*[/]*/	
+	
+	/*[# th:if="${aluno.turma != null}"]*/
+	$(document).ready(function() {
+		$.get('/aluno/turma/listar' , function( result ) {
+	    	$.each(result, function (k, v) {
+	    		if(v.id == [[${aluno.turma.id}]]){
+	    			$("#turmas").append( 
+	        				'<option name= "op" class="op" value="'+ v.id +'" selected="selected">'+ v.nome + '</option>'
+	        		);
+	    		}else{
+	    			$("#turmas").append( 
+	        				'<option name= "op" class="op" value="'+ v.id +'">'+ v.nome + '</option>'
+	        		);
+	    		}
+    				            			
+	    	  });
+	    	});
+	    });
+	/*[/]*/	
+	
+	/*[# th:if="${aluno.turma == null}"]*/
+	$(document).ready(function() {
+		$.get('/aluno/turma/listar' , function( result ) {
+	    	$.each(result, function (k, v) {	    		
+    			$("#turmas").append( 
+        				'<option name= "op" class="op" value="'+ v.id +'">'+ v.nome + '</option>'
+        		);	    			            			
+	    	  });
+	    	});
+	    });
+	/*[/]*/	
+	</script>
+</body>
+</html>
