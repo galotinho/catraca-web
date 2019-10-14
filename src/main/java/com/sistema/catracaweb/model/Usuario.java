@@ -14,7 +14,7 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity	
-@Table(name = "usuarios")
+@Table(name = "USUARIOS")
 public class Usuario {	
 	
 	@EqualsAndHashCode.Include

@@ -14,7 +14,7 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity	
-@Table
+@Table(name="TURMA")
 public class Turma {
 
 	@EqualsAndHashCode.Include
