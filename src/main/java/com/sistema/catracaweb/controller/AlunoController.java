@@ -29,13 +29,6 @@ public class AlunoController {
 		return "administrador/aluno";
 	}
 	
-	@GetMapping("/autorizar")
-	public String autorizar(ModelMap model) {
-		
-		//model.addAttribute("aluno", new Aluno());
-		return "nutricionista/autorizar-aluno";
-	}
-	
 	@PostMapping("/salvar")
 	public String salvar(Aluno aluno, RedirectAttributes attr) {
 		service.salvar(aluno);

@@ -17,6 +17,11 @@ public interface RefeicaoRepository extends JpaRepository<Refeicao, Long> {
 			+ "from Refeicao r "
 			+ "where r.data = :data")
 	List<LocalDate> findByData(LocalDate data);
+	
+	@Query("select r "
+			+ "from Refeicao r "
+			+ "where r.data = :data")
+	Refeicao findByRefeicaoData(LocalDate data);
 
 	@Query("select a "
 			+ "from Alimento a "

@@ -111,8 +111,7 @@ public class RefeicaoController {
 		return ResponseEntity.ok(service.buscarRefeicoesHome(request));
 		
 	}
-	
-	
+		
 	@GetMapping("/excluir/{id}")
 	public String excluirRefeicao(@PathVariable("id") Long id, RedirectAttributes attr) {
 		

@@ -21,14 +21,14 @@
 				<div class="d-flex justify-content-center">					
 					<div class="col-md-8">						
 						<div th:replace="fragments/alert"></div>
-						<form th:action="@{/aluno/salvar}"
-							method="POST" class="was-validated">							
+						<form th:action="${autorizacao.id == null} ? @{/autorizacao/salvar} : @{/autorizacao/editar}"
+							th:object="${autorizacao}"	method="POST" class="was-validated">							
 							<div class="form-row">								
 							<div class="form-group col-md-12">
-								<small class="form-text text-muted">Selecione 
-									a data</small>
+							<label for="nome">Selecione 
+									a data</label>
 								<input class="form-control" type="date" id="data" 
-									 required/>
+									 th:field="*{refeicao.data}"required/>
 								<div class="invalid-feedback">
 							      Data é obrigatória.
 							    </div>	
@@ -39,25 +39,23 @@
 							    <label for="nome">Curso</label> 
 							  </div>
 							  <div id="curso" class="input-group">
-								  <select class="custom-select" id="cursos">
+								  <select class="custom-select" id="cursos" th:field="*{curso}">
 								    
 								  </select>
 								  <div class="invalid-feedback">Curso é requerido.</div>
 							  </div>
 							</div>
-							<div class="input-group mb-3">
-							  <div class="input-group-prepend">
-							    <label for="nome">Turma</label> 
-							  </div>
-							  <div id="turma" class="input-group">
-								  <select class="custom-select" id="turmas">
-								    
-								  </select>
-								  <div class="invalid-feedback">Turma é requerida.</div>
-							  </div>
+							<div class="form-row">
+								<div class="form-group col-md-12">
+									<label for="nome">Turma(s)</label>
+									<select id="turmas" class="custom-select" size="5" name="turmas"
+									th:field="*{turmasLista}" multiple> 										
+									</select>
+									<div class="invalid-feedback">Turmas são requeridas</div>
+								</div>
 							</div>
 							
-							<input type="hidden"/>	
+							<input type="hidden" th:field="*{id}"/>	
 											
 							<div class="form-group row">
 								<div class="col-sm-10">
@@ -66,6 +64,21 @@
 								</div>
 							</div>
 						</form>
+						<hr/>
+						
+						<h2>Lista de Autorizados</h2>
+						
+						<table id="table-autorizacao" class="table table-sm table-striped table-bordered nowrap" style="width:100%">
+						  <thead class="thead-dark">
+						    <tr>
+						      <th scope="col">Data</th>
+						      <th scope="col">Alunos</th>
+						      <th scope="col">Curso</th>
+						      <th scope="col">Turma(s)</th>
+						      <th scope="col">Excluir</th>
+						    </tr>
+						  </thead>
+						</table>
 					</div>
 				</div>
 			</div>
@@ -73,7 +86,7 @@
 		
 		</main>
 	</section>
-	<script th:src="@{/js/aluno.js?(v=${version})}" th:fragment="js"></script>
+	<script th:src="@{/js/autorizacao.js?(v=${version})}" th:fragment="js"></script>
 	<script th:inline="javascript" th:fragment="inlinescript">
 	
 	$(document).ready(function() {
@@ -86,15 +99,14 @@
 	    	});
 	    });
 	
-	$(document).ready(function() {
-		$.get('/aluno/turma/listar' , function( result ) {
-	    	$.each(result, function (k, v) {	    		
-    			$("#turmas").append( 
-        				'<option name= "op" class="op" value="'+ v.id +'">'+ v.nome + '</option>'
-        		);	    			            			
-	    	  });
-	    	});
+	
+	$.get('/aluno/turma/listar', function( result ) {
+		$.each(result, function (k, v) {
+			$("#turmas").append( 
+				'<option class="op" value="'+ v.id +'">'+ v.nome + '</option>'
+			);	            			
 	    });
+	});
 	
 	</script>
 </body>

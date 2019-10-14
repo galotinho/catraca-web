@@ -23,7 +23,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		 http.authorizeRequests()
 		 .antMatchers("/webjars/**", "/css/**", "/js/**", "/image/**").permitAll()
 		 .antMatchers("/login","/").permitAll()
-		 .antMatchers(HttpMethod.GET, "/refeicao/home/datatables/server").permitAll()
+		 .antMatchers(HttpMethod.GET, "/refeicao/home/datatables/server", "/autorizacao/home/datatables/server").permitAll()
 		 /*
 		  * Para adicionar autorização para cada ação do controller faça: 
 		  *
