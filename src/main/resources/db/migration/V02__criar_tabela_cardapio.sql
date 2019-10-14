@@ -26,10 +26,10 @@ ALTER TABLE REFEICAO_TEM_ALIMENTOS
  
 COMMIT;
  
-INSERT INTO alimentos VALUES (1, 'Arroz', 'Cereal');
-INSERT INTO alimentos VALUES (2, 'Feijão', 'Cereal');
-INSERT INTO alimentos VALUES (3, 'Carne', 'Proteína Animal');
-INSERT INTO alimentos VALUES (4, 'Salada', 'Vegetais');
+INSERT INTO ALIMENTOS VALUES (1, 'Arroz', 'Cereal');
+INSERT INTO ALIMENTOS VALUES (2, 'Feijão', 'Cereal');
+INSERT INTO ALIMENTOS VALUES (3, 'Carne', 'Proteína Animal');
+INSERT INTO ALIMENTOS VALUES (4, 'Salada', 'Vegetais');
 
 COMMIT;
 
